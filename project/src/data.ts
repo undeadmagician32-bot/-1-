@@ -6,9 +6,18 @@ export type Strength = {
   situation: string;
   action: string;
   result: string;
-  // link: 실제로 열리는 공개 웹페이지 주소가 있을 때 사용 (예: moddb, GitHub 등)
-  // image: 그런 링크가 없을 때, public/evidence/ 안의 스크린샷 파일 경로를 적으면 됨
-  evidence: { label: string; link: string; image?: string; description: string };
+  // link: 실제로 열리는 공개 웹페이지 주소가 하나 있을 때 사용 (예: moddb, GitHub 등)
+  // image: 스크린샷 1장일 때 public/evidence/ 안의 파일 경로
+  // images: 스크린샷/사진이 여러 장일 때 (갤러리로 보여줌)
+  // links: 공개 링크가 여러 개일 때 (예: 참고한 유튜브 영상 여러 개)
+  evidence: {
+    label: string;
+    link: string;
+    image?: string;
+    images?: string[];
+    links?: { label: string; url: string }[];
+    description: string;
+  };
 };
 
 // TODO: 아래 "[ ]" 로 표시된 항목은 아직 채워지지 않은 항목입니다.
@@ -16,7 +25,7 @@ export const profile = {
   name: '양재훈',
   role: 'AI 시대의 미개척지로 나아가는 도전자',
   summary:
-    '영어로 소통하는 데 강점이 있고, 새로운 문화나 사고방식을 열린 마음으로 받아들이며, 깊이 생각하는 것을 좋아합니다.',
+    '영어로 소통하는 데 강점이 있고, 새로운 문화나 사고방식을 열린 마음으로 받아들이며, 깊이 생각하는 것을 좋아합니다. [본인의 자기소개 문장을 이어서 적어주세요]',
   location: '경북',
   education: '대졸',
   emailPublic: 'undead32@naver.com',
@@ -43,8 +52,8 @@ export const strengths: Strength[] = [
     situation:
       '게임 커뮤니티 디스코드 등에서 필요한 정보를 찾거나 사람들과 교류해야 하는 상황이 자주 있었습니다.',
     action:
-      '오류나 질문점을 구체적인 예시를 들어 교류했습니다. 게임 이벤트의 어느 부분에서 오류가 생겼는지, 어떤 patch가 충돌했는지 등을 짚어가며 소통했습니다.',
-    result: '결과적으로 모드에서 생기는 문제를 해결했습니다.',
+      '오류나 질문점을 구체적인 예시를 들어 교류했습니다. 로그파일의 어느 부분에서 Fatal Error가 떴는지, 어떤 Graphic Asset이 충돌했는지 등을 짚어가며 소통했습니다.',
+    result: '결과적으로 모드에서 부딪히는 문제를 해결했습니다.',
     evidence: {
       label: 'Return to the Zone — English Translation (ModDB)',
       link: 'https://www.moddb.com/mods/return-to-the-zone-english-translation',
@@ -64,9 +73,9 @@ export const strengths: Strength[] = [
     result:
       '건설이라는 업종에 대한 새로운 경험을 했지만, 너무나도 좋지 않은 환경이라 후회했습니다. 다만 그 경험으로 최저값을 갱신해 욕심을 버릴 수 있게 되었습니다.',
     evidence: {
-      label: '이직내역 서류 올리기',
+      label: '[공개 가능한 근거 제목]',
       link: '',
-      description: '서류 사진으로 올리기아직 근거 링크가 입력되지 않았습니다. 실제로 열리는 공개 링크나 스크린샷을 연결해주세요.',
+      description: '아직 근거 링크가 입력되지 않았습니다. 실제로 열리는 공개 링크나 스크린샷을 연결해주세요.',
     },
   },
   {
@@ -76,12 +85,30 @@ export const strengths: Strength[] = [
     icon: 'brain',
     situation:
       '뇌과학 등 사고 관련 유튜브 영상을 즐겨 보는 등, 스스로 깊이 생각할 거리가 있는 주제를 찾아 다녔습니다.',
-    action: '영상을 보고 따로 노트에 적고 구체적으로 어떤 행동을 했는지 적어주세요. 예: 영상을 보고 정리한 기록, 관련 활동 등]',
-    result: '[그 결과를 적어주세요. 예: 어떤 결론에 도달했는지, 어디에 활용했는지 등]',
+    action:
+      '도파민·동기부여·집중력을 다룬 영상을 보면서 핵 측좌핵, 전전두엽, 오피오이드 회로 같은 개념과 "테이프를 끝까지 재생해보기", 파킨슨 법칙(마감 활용), 점진적으로 집중 시간 늘리기 같은 기법을 손으로 직접 정리했습니다. 거기서 그치지 않고 제 하루 일정(공부와 게임 시간)에 그대로 대입해 왜 공부보다 게임에 더 끌리는지를 도파민 비교 관점에서 분석해봤습니다.',
+    result:
+      '그 결과 "왜 나는 쉬운 행동에 더 끌리는가"를 뇌과학적으로 이해하게 됐고, 집중력을 늘리기 위한 구체적인 전략(목표를 작게 쪼개기, 마감 걸기, 의식적으로 가치 판단하기 등)을 스스로 정리해 실제 생활에 적용해보고 있습니다.',
     evidence: {
-      label: '내가 봤던 동영상 링크와, 노트 사진',
+      label: '깊은 생각 — 도파민·집중력 관련 손글씨 메모',
       link: '',
-      description: '마찬가지로 노트 사진과 링크 아직 근거 링크가 입력되지 않았습니다. 실제로 열리는 공개 링크나 스크린샷을 연결해주세요.',
+      images: [
+        '/evidence/deep-thinking-01.jpg',
+        '/evidence/deep-thinking-02.jpg',
+        '/evidence/deep-thinking-03.jpg',
+        '/evidence/deep-thinking-04.jpg',
+        '/evidence/deep-thinking-05.jpg',
+        '/evidence/deep-thinking-06.jpg',
+        '/evidence/deep-thinking-07.jpg',
+        '/evidence/deep-thinking-08.jpg',
+        '/evidence/deep-thinking-09.jpg',
+        '/evidence/deep-thinking-10.jpg',
+      ],
+      links: [
+        { label: '참고 영상 1', url: 'https://www.youtube.com/watch?v=xkd36cJ6Z78' },
+        { label: '참고 영상 2', url: 'https://www.youtube.com/watch?v=6CWq8wyS90o' },
+      ],
+      description: '도파민과 동기부여, 집중력에 관한 영상을 보며 정리한 손글씨 메모입니다.',
     },
   },
 ];
