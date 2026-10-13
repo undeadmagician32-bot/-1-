@@ -18,8 +18,12 @@ export class HttpError extends Error {
 const RP_NAME = '나를 소개하는 한 페이지';
 const CHALLENGE_TTL_SEC = 5 * 60; // 질문은 5분 동안만 보관
 const SESSION_TTL_SEC = 8 * 60 * 60; // 세션은 8시간
-const ORIGINS = (process.env.ORIGINS || 'https://1-project-nine.vercel.app,http://localhost:3000,http://localhost:5173')
-  .split(',').map((s) => s.trim()).filter(Boolean);
+// 패스키를 허용할 주소. ORIGINS 로 직접 정할 수 있고, Vercel 에서는 그 배포의 주소(운영·브랜치·이번 배포)를 자동으로 더한다.
+const ORIGINS = [
+  ...(process.env.ORIGINS || 'https://1-project-nine.vercel.app,http://localhost:3000,http://localhost:5173').split(','),
+  ...['VERCEL_PROJECT_PRODUCTION_URL', 'VERCEL_BRANCH_URL', 'VERCEL_URL']
+    .map((k) => process.env[k]).filter(Boolean).map((h) => `https://${h}`),
+].map((s) => s.trim()).filter(Boolean);
 
 // 패스키가 어디에 저장됐는지 AAGUID(인증기 종류 번호)로 짐작한다.
 const AAGUID_NAMES = {
