@@ -120,6 +120,14 @@ function StrengthCard({ strength, index }: { strength: Strength; index: number }
           <span className="mt-1 block text-center text-xs text-accent-300/80">
             클릭하면 원본 크기로 열립니다
           </span>
+          {!isRealLink(strength.evidence.link) && (
+            <span className="mt-2 block text-sm text-ink-100">
+              <span className="font-medium">{strength.evidence.label}</span>
+              <span className="mt-0.5 block text-xs text-ink-300">
+                {strength.evidence.description}
+              </span>
+            </span>
+          )}
         </a>
       )}
 
